@@ -1,110 +1,198 @@
 import React, { useState, useEffect } from "react";
 import { Check, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const RHPlans = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedOS, setSelectedOS] = useState("linux");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
-  const linuxPlans = [
-    {
-      name: "Basic",
-      price: "799",
-      originalPrice: "1,598",
-      savings: "50%",
-      description: "Perfect for personal websites and blogs",
-      features: [
-        "Unlimited Website",
-        "25 GB Storage",
-        "Unlimited Bandwidth",
-        "Unlimited cPanel Accounts",
-        "Unlimited Email Accounts",
-        "Unlimited Sub Domains",
-        "Unlimited Mysql Database",
-        "99.9% Uptime Guarantee",
-      ],
-      ctaText: "Buy Now",
-      popular: false,
-    },
-    {
-      name: "Professional",
-      price: "1,299",
-      originalPrice: "2,598",
-      savings: "50%",
-      description: "Ideal for growing businesses and portfolios",
-      features: [
-        "Unlimited Website",
-        "50 GB Storage",
-        "Unlimited Bandwidth",
-        "Unlimited cPanel Accounts",
-        "Unlimited Email Accounts",
-        "Unlimited Sub Domains",
-        "Unlimited Mysql Database",
-        "99.9% Uptime Guarantee",
-      ],
-      ctaText: "Buy Now",
-      popular: true,
-    },
-    {
-      name: "Business",
-      price: "1,599",
-      originalPrice: "3,198",
-      savings: "50%",
-      description: "Advanced features for professional websites",
-      features: [
-        "Unlimited Website",
-        "100 GB Storage",
-        "Unlimited Bandwidth",
-        "Unlimited cPanel Accounts",
-        "Unlimited Email Accounts",
-        "Unlimited Sub Domains",
-        "Unlimited Mysql Database",
-        "99.9% Uptime Guarantee",
-      ],
-      ctaText: "Buy Now",
-      popular: false,
-    },
-    {
-      name: "Enterprise",
-      price: "2,199",
-      originalPrice: "4,398",
-      savings: "50%",
-      description: "Maximum performance for high-traffic sites",
-      features: [
-        "Unlimited Website",
-        "200 GB Storage",
-        "Unlimited Bandwidth",
-        "Unlimited cPanel Accounts",
-        "Unlimited Email Accounts",
-        "Unlimited Sub Domains",
-        "Unlimited Mysql Database",
-        "99.9% Uptime Guarantee",
-      ],
-      ctaText: "Buy Now",
-      popular: false,
-    },
-  ];
+  const handleBuyNow = (plan) => {
+    navigate("/billing", { state: { plan } });
+  };
 
-  const windowsPlans = linuxPlans.map(plan => ({
-    ...plan,
-    name: plan.name + " Windows",
-    features: plan.features.map(f =>
-      f.includes("cPanel") ? f.replace("cPanel", "Plesk") : f
-    ),
-    ctaText: "Get Started",
-  }));
+  // Main Plans Data
+  const plansData = {
+    linux: [
+      {
+        name: "Basic",
+        price: "799",
+        originalPrice: "1,598",
+        savings: "50%",
+        description: "Perfect for personal websites and blogs",
+        features: [
+          "Unlimited Website",
+          "25 GB Storage",
+          "Unlimited Bandwidth",
+          "Unlimited cPanel Accounts",
+          "Unlimited Email Accounts",
+          "Unlimited Sub Domains",
+          "Unlimited Mysql Database",
+          "99.9% Uptime Guarantee",
+        ],
+        ctaText: "Buy Now",
+        popular: false,
+        buttonStyle: "primary",
+      },
+      {
+        name: "Professional",
+        price: "1,299",
+        originalPrice: "2,598",
+        savings: "50%",
+        description: "Ideal for growing businesses and portfolios",
+        features: [
+          "Unlimited Website",
+          "50 GB Storage",
+          "Unlimited Bandwidth",
+          "Unlimited cPanel Accounts",
+          "Unlimited Email Accounts",
+          "Unlimited Sub Domains",
+          "Unlimited Mysql Database",
+          "99.9% Uptime Guarantee",
+        ],
+        ctaText: "Buy Now",
+        popular: true,
+        buttonStyle: "primary",
+      },
+      {
+        name: "Business",
+        price: "1,599",
+        originalPrice: "3,198",
+        savings: "50%",
+        description: "Advanced features for professional websites",
+        features: [
+          "Unlimited Website",
+          "100 GB Storage",
+          "Unlimited Bandwidth",
+          "Unlimited cPanel Accounts",
+          "Unlimited Email Accounts",
+          "Unlimited Sub Domains",
+          "Unlimited Mysql Database",
+          "99.9% Uptime Guarantee",
+        ],
+        ctaText: "Buy Now",
+        popular: false,
+        buttonStyle: "primary",
+      },
+      {
+        name: "Enterprise",
+        price: "2,199",
+        originalPrice: "4,398",
+        savings: "50%",
+        description: "Maximum performance for high-traffic sites",
+        features: [
+          "Unlimited Website",
+          "200 GB Storage",
+          "Unlimited Bandwidth",
+          "Unlimited cPanel Accounts",
+          "Unlimited Email Accounts",
+          "Unlimited Sub Domains",
+          "Unlimited Mysql Database",
+          "99.9% Uptime Guarantee",
+        ],
+        ctaText: "Buy Now",
+        popular: false,
+        buttonStyle: "primary",
+      },
+    ],
+    windows: [
+      {
+        name: "Basic",
+        price: "999",
+        originalPrice: "1,898",
+        savings: "50%",
+        description: "Perfect for personal websites and blogs",
+        features: [
+          "Unlimited Website",
+          "25 GB Storage",
+          "Unlimited Bandwidth",
+          "Unlimited Plesk Accounts",
+          "Unlimited Email Accounts",
+          "Unlimited Sub Domains",
+          "Unlimited Mysql Database",
+          "99.9% Uptime Guarantee",
+        ],
+        ctaText: "Buy Now",
+        popular: false,
+        buttonStyle: "primary",
+      },
+      {
+        name: "Professional",
+        price: "1,699",
+        originalPrice: "2,798",
+        savings: "50%",
+        description: "Ideal for growing businesses and portfolios",
+        features: [
+          "Unlimited Website",
+          "50 GB Storage",
+          "Unlimited Bandwidth",
+          "Unlimited Plesk Accounts",
+          "Unlimited Email Accounts",
+          "Unlimited Sub Domains",
+          "Unlimited Mysql Database",
+          "99.9% Uptime Guarantee",
+        ],
+        ctaText: "Buy Now",
+        popular: true,
+        buttonStyle: "primary",
+      },
+      {
+        name: "Business",
+        price: "1,999",
+        originalPrice: "3,498",
+        savings: "50%",
+        description: "Advanced features for professional websites",
+        features: [
+          "Unlimited Website",
+          "100 GB Storage",
+          "Unlimited Bandwidth",
+          "Unlimited Plesk Accounts",
+          "Unlimited Email Accounts",
+          "Unlimited Sub Domains",
+          "Unlimited Mysql Database",
+          "99.9% Uptime Guarantee",
+        ],
+        ctaText: "Buy Now",
+        popular: false,
+        buttonStyle: "primary",
+      },
+      {
+        name: "Enterprise",
+        price: "2,499",
+        originalPrice: "4,598",
+        savings: "50%",
+        description: "Maximum performance for high-traffic sites",
+        features: [
+          "Unlimited Website",
+          "200 GB Storage",
+          "Unlimited Bandwidth",
+          "Unlimited Plesk Accounts",
+          "Unlimited Email Accounts",
+          "Unlimited Sub Domains",
+          "Unlimited Mysql Database",
+          "99.9% Uptime Guarantee",
+        ],
+        ctaText: "Buy Now",
+        popular: false,
+        buttonStyle: "primary",
+      },
+    ],
+  };
 
-  const plans = selectedOS === "linux" ? linuxPlans : windowsPlans;
+  // Select plans based on OS
+  const plans = plansData[selectedOS];
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-sky-100 via-white to-indigo-100 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div
+          id="RHPlans"
           className={`text-center mb-16 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
@@ -114,7 +202,7 @@ const RHPlans = () => {
             <span className="text-blue-600"> Reseller Hosting Plan</span>
           </h2>
           <p className="text-sm text-[#0e3c47cc] max-w-3xl mx-auto leading-relaxed">
-            Get started with complete confidence. Our 30-day money-back
+            Buy Now with complete confidence. Our 30-day money-back
             guarantee means it's risk-free.
           </p>
 
@@ -163,10 +251,9 @@ const RHPlans = () => {
             >
               {/* Popular Badge */}
               {plan.popular && (
-                <div className="absolute -top-7 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-1 rounded-full text-sm font-medium flex items-center gap-1 shadow-lg">
-                    <Star className="w-4 h-4 fill-current" />
-                    Most Popular
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-green-600 text-white px-4 py-1 rounded-full text-sm font-medium relative -top-1">
+                    Best value
                   </div>
                 </div>
               )}
@@ -213,10 +300,11 @@ const RHPlans = () => {
                 </div>
 
                 <button
-                  className={`w-full py-4 px-6 rounded-xl font-semibold text-base transition-all duration-300 transform hover:scale-105 ${
-                    plan.popular
-                      ? "bg-gradient-to-r from-[#0e3c47] to-[#0040514d] text-white shadow-lg"
-                      : "bg-gray-100 text-gray-900 hover:bg-blue-50 hover:text-blue-700 border-2 border-transparent hover:border-blue-200"
+                  onClick={() => handleBuyNow(plan)}
+                  className={`w-full py-3 rounded-md font-medium text-sm transition-transform duration-300 ease-in-out transform ${
+                    plan.buttonStyle === "primary"
+                      ? "bg-[#1c7389] text-white hover:bg-[#0e3c47] hover:scale-105"
+                      : "border border-gray-300 text-gray-700 hover:bg-gray-50 hover:scale-105"
                   }`}
                 >
                   {plan.ctaText}

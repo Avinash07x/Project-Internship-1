@@ -8,6 +8,12 @@ import Clients from "../components/Clients";
 
 
 const SharedHostingpage = () => {
+    const handleScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <>
       <div className="min-h-[65vh] bg-gradient-to-br from-[#dff6fd] to-[#f7fafe] relative overflow-hidden">
@@ -79,6 +85,7 @@ const SharedHostingpage = () => {
               {/* CTA Button */}
               <div className="pt-0">
                 <button
+                  onClick={() => handleScroll("SHPlans")}
                   className="group bg-[#126276] hover:bg-[#218aa4] text-white font-semibold px-5 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg inline-flex items-center space-x-2 text-base"
                   aria-label="View all hosting plans"
                 >
@@ -150,7 +157,9 @@ const SharedHostingpage = () => {
         `}</style>
       </div>
 
-      <SHPlans/>
+      <div id="SHPlans">
+        <SHPlans />
+      </div>
       <SHFeatures/> 
       <FAQsection />
       <div className=" mt-20">

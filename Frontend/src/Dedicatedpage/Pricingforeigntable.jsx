@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { Server } from 'lucide-react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PricingforeignTable = () => {
-  const [selectedOs, setSelectedOs] = useState('linux');
+  const [selectedOs, setSelectedOs] = useState("linux");
+  const navigate = useNavigate();
+
+  const handleBuyNow = (server) => {
+    navigate("/billing", { state: { plan: server } });
+  };
 
   const servers = [
     {
@@ -14,7 +19,7 @@ const PricingforeignTable = () => {
       ips: "1 IPv4",
       price: 4999,
       popular: false,
-      location: "USA - Los Angeles"
+      location: "USA - Los Angeles",
     },
     {
       processor: "Intel Core i7-13700 8 Cores",
@@ -25,7 +30,7 @@ const PricingforeignTable = () => {
       ips: "1 IPv4",
       price: 7999,
       popular: true,
-      location: "USA - New York"
+      location: "USA - New York",
     },
     {
       processor: "AMD Ryzen 7 7700X 8 Cores",
@@ -36,7 +41,7 @@ const PricingforeignTable = () => {
       ips: "1 IPv4",
       price: 6999,
       popular: false,
-      location: "Canada - Toronto"
+      location: "Canada - Toronto",
     },
     {
       processor: "Intel Xeon E-2378 8 Cores",
@@ -47,7 +52,7 @@ const PricingforeignTable = () => {
       ips: "1 IPv4",
       price: 12999,
       popular: false,
-      location: "UK - London"
+      location: "UK - London",
     },
     {
       processor: "AMD EPYC 7443P 24 Cores",
@@ -58,7 +63,7 @@ const PricingforeignTable = () => {
       ips: "1 IPv4",
       price: 18999,
       popular: false,
-      location: "Germany - Frankfurt"
+      location: "Germany - Frankfurt",
     },
     {
       processor: "Intel Xeon Gold 5418Y 24 Cores",
@@ -69,7 +74,7 @@ const PricingforeignTable = () => {
       ips: "1 IPv4",
       price: 24999,
       popular: false,
-      location: "Netherlands - Amsterdam"
+      location: "Netherlands - Amsterdam",
     },
     {
       processor: "AMD EPYC 7763 64 Cores",
@@ -80,7 +85,7 @@ const PricingforeignTable = () => {
       ips: "1 IPv4",
       price: 35999,
       popular: false,
-      location: "France - Paris"
+      location: "France - Paris",
     },
     {
       processor: "Dual Intel Xeon Gold 6448Y 64 Cores",
@@ -91,7 +96,7 @@ const PricingforeignTable = () => {
       ips: "5 IPv4",
       price: 49999,
       popular: false,
-      location: "Switzerland - Zurich"
+      location: "Switzerland - Zurich",
     },
     {
       processor: "Dual AMD EPYC 9654 192 Cores",
@@ -102,7 +107,7 @@ const PricingforeignTable = () => {
       ips: "10 IPv4",
       price: 79999,
       popular: false,
-      location: "Singapore"
+      location: "Singapore",
     },
     {
       processor: "Quad Intel Xeon Platinum 8490H 240 Cores",
@@ -113,15 +118,20 @@ const PricingforeignTable = () => {
       ips: "25 IPv4",
       price: 149999,
       popular: false,
-      location: "Japan - Tokyo"
-    }
+      location: "Japan - Tokyo",
+    },
   ];
 
   return (
-    <div id="foreign" className="min-h-screen bg-gradient-to-br from-[#dff6fd] to-[#f7fafe] p-4 sm:p-6">
+    <div
+      id="foreign"
+      className="min-h-screen bg-gradient-to-br from-[#dff6fd] to-[#f7fafe] p-4 sm:p-6"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-6">
+        <div
+          id="DIPlans"
+          className="text-center mb-6">
           <div className="flex items-center justify-center gap-3 mb-4">
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-blue-500 drop-shadow-sm tracking-tight">
               Foreign's Best Linux / Windows Dedicated Servers at Affordable Prices
@@ -131,7 +141,6 @@ const PricingforeignTable = () => {
 
         {/* Desktop Table */}
         <div className="hidden lg:block">
-          {/* Table Header */}
           <div className="bg-sky-900 text-white rounded-t-lg">
             <div className="grid grid-cols-8 gap-6 p-4 font-semibold text-sm lg:text-base">
               <div>Dedicated Processors</div>
@@ -145,14 +154,12 @@ const PricingforeignTable = () => {
             </div>
           </div>
 
-          {/* Server Rows */}
           <div className="bg-white rounded-b-lg shadow-lg overflow-hidden">
             {servers.map((server, index) => (
               <div
                 key={index}
-                className={`grid grid-cols-8 gap-4 p-4 border-b border-slate-100 hover:bg-slate-50 transition-colors ${
-                  server.popular ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''
-                }`}
+                className={`grid grid-cols-8 gap-4 p-4 border-b border-slate-100 hover:bg-slate-50 transition-colors ${server.popular ? "bg-blue-50 border-l-4 border-l-blue-500" : ""
+                  }`}
               >
                 <div className="font-medium text-slate-700">
                   {server.processor}
@@ -167,9 +174,14 @@ const PricingforeignTable = () => {
                 <div className="text-slate-600 text-sm">{server.storage}</div>
                 <div className="text-slate-600 text-sm">{server.bandwidth}</div>
                 <div className="text-slate-600 text-sm">{server.ips}</div>
-                <div className="text-slate-600 text-sm">₹{server.price.toLocaleString()}</div>
+                <div className="text-slate-600 text-sm">
+                  ₹{server.price.toLocaleString()}
+                </div>
                 <div>
-                  <button className="bg-sky-900 hover:bg-teal-600 text-white px-4 py-2 rounded-md transition-colors text-sm font-medium">
+                  <button
+                    onClick={() => handleBuyNow(server)}
+                    className="bg-sky-900 hover:bg-teal-600 text-white px-4 py-2 rounded-md transition-colors text-sm font-medium"
+                  >
                     Configure Now
                   </button>
                 </div>
@@ -183,12 +195,13 @@ const PricingforeignTable = () => {
           {servers.map((server, index) => (
             <div
               key={index}
-              className={`bg-white p-4 rounded-lg shadow-md border ${
-                server.popular ? 'border-blue-500' : 'border-gray-200'
-              }`}
+              className={`bg-white p-4 rounded-lg shadow-md border ${server.popular ? "border-blue-500" : "border-gray-200"
+                }`}
             >
               <div className="mb-2">
-                <h2 className="text-base font-semibold text-slate-800">{server.processor}</h2>
+                <h2 className="text-base font-semibold text-slate-800">
+                  {server.processor}
+                </h2>
                 <p className="text-sm text-sky-600">{server.location}</p>
                 {server.popular && (
                   <span className="inline-block mt-1 px-2 py-1 text-xs text-white bg-blue-500 rounded-full">
@@ -197,15 +210,30 @@ const PricingforeignTable = () => {
                 )}
               </div>
               <ul className="text-sm text-slate-600 space-y-1">
-                <li><strong>Clock:</strong> {server.clock}</li>
-                <li><strong>RAM:</strong> {server.ram}</li>
-                <li><strong>Storage:</strong> {server.storage}</li>
-                <li><strong>Bandwidth:</strong> {server.bandwidth}</li>
-                <li><strong>IPs:</strong> {server.ips}</li>
-                <li><strong>Price:</strong> ₹{server.price.toLocaleString()}</li>
+                <li>
+                  <strong>Clock:</strong> {server.clock}
+                </li>
+                <li>
+                  <strong>RAM:</strong> {server.ram}
+                </li>
+                <li>
+                  <strong>Storage:</strong> {server.storage}
+                </li>
+                <li>
+                  <strong>Bandwidth:</strong> {server.bandwidth}
+                </li>
+                <li>
+                  <strong>IPs:</strong> {server.ips}
+                </li>
+                <li>
+                  <strong>Price:</strong> ₹{server.price.toLocaleString()}
+                </li>
               </ul>
               <div className="mt-4">
-                <button className="w-full bg-sky-900 hover:bg-teal-600 text-white py-2 rounded-md transition-colors text-sm font-medium">
+                <button
+                  onClick={() => handleBuyNow(server)}
+                  className="w-full bg-sky-900 hover:bg-teal-600 text-white py-2 rounded-md transition-colors text-sm font-medium"
+                >
                   Configure Now
                 </button>
               </div>

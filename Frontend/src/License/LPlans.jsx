@@ -218,10 +218,12 @@
 // -------------------------------------------------------
 
 import React, { useState, useEffect } from "react";
-import { Check, Server, Shield, Globe, Wrench, Headphones, Star } from "lucide-react";
+import { Check, Server, Shield, Globe, Wrench, Headphones } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const LPlans = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100);
@@ -230,39 +232,59 @@ const LPlans = () => {
 
   const plans = [
     {
-      name: "cPanel/whm licenses for VPS Server",
+      name: "cPanel/WHM License for VPS Server",
       subtitle: "START FROM",
       price: 599,
       features: [
-        { icon: <Globe className="w-4 h-4" />, text: "Create cPanel unlimited accounts" },
-        { icon: <Shield className="w-4 h-4" />, text: "Free Premium softaculous (One click CMS installer )" },
-        { icon: <Shield className="w-4 h-4" />, text: "Free Free FileSSL (Lets encrypt SSL certificate )" },
-        { icon: <Wrench className="w-4 h-4" />, text: "Free sitepad website builder" },
-        { icon: <Server className="w-4 h-4" />, text: "Free Installation for license" },
-        { icon: <Headphones className="w-4 h-4" />, text: "Always free in house technical support" },
+        "Create unlimited cPanel accounts",
+        "Premium Softaculous (One-click CMS installer)",
+        "Free FileSSL (Let's Encrypt SSL certificate)",
+        "SitePad website builder",
+        "Free installation for license",
+        "24/7 in-house technical support",
       ],
       bestValue: false,
+      ctaText: "Buy Now",
+      buttonStyle: "primary",
     },
     {
-      name: "cPanel/whm licenses for Dedicated Server",
+      name: "cPanel/WHM License for Dedicated Server",
       subtitle: "START FROM",
       price: 1099,
       features: [
-        { icon: <Globe className="w-4 h-4" />, text: "Create cPanel unlimited accounts" },
-        { icon: <Shield className="w-4 h-4" />, text: "Free Premium softaculous (One click CMS installer )" },
-        { icon: <Shield className="w-4 h-4" />, text: "Free Free FileSSL (Lets encrypt SSL certificate )" },
-        { icon: <Wrench className="w-4 h-4" />, text: "Free sitepad website builder" },
-        { icon: <Server className="w-4 h-4" />, text: "Free Installation for license" },
-        { icon: <Headphones className="w-4 h-4" />, text: "Always free in house technical support" },
+        "Create unlimited cPanel accounts",
+        "Premium Softaculous (One-click CMS installer)",
+        "Free FileSSL (Let's Encrypt SSL certificate)",
+        "SitePad website builder",
+        "Free installation for license",
+        "24/7 in-house technical support",
       ],
       bestValue: true,
+      ctaText: "Buy Now",
+      buttonStyle: "primary",
     },
   ];
+
+  const handleBuyNow = (plan) => {
+    navigate("/billing", { state: { plan } });
+  };
+
+  const getFeatureIcon = (feature) => {
+    if (feature.toLowerCase().includes("cpanel")) return <Globe className="w-5 h-5" />;
+    if (feature.toLowerCase().includes("softaculous")) return <Shield className="w-5 h-5" />;
+    if (feature.toLowerCase().includes("ssl")) return <Shield className="w-5 h-5" />;
+    if (feature.toLowerCase().includes("sitepad")) return <Wrench className="w-5 h-5" />;
+    if (feature.toLowerCase().includes("installation")) return <Server className="w-5 h-5" />;
+    if (feature.toLowerCase().includes("support")) return <Headphones className="w-5 h-5" />;
+    return <Check className="w-5 h-5" />;
+  };
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-sky-100 via-white to-indigo-100 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
+        {/* Header */}
         <div
+          id="LPlans"
           className={`text-center mb-16 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
@@ -275,46 +297,54 @@ const LPlans = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-center items-center">
+        {/* Plans Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 ${
-                plan.bestValue ? "ring-4 ring-green-500 ring-opacity-80" : ""
-              } ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+              className={`relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 
+                ${plan.bestValue ? "ring-4 ring-green-500 ring-opacity-80" : ""} 
+                ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} 
+                flex flex-col`}  // ✅ make card flex column
               style={{ transitionDelay: `${index * 150}ms` }}
             >
+              {/* Best Value Badge */}
               {plan.bestValue && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-1 rounded-full text-sm font-medium flex items-center gap-1 shadow-lg">
-                    <Star className="w-4 h-4 fill-current" /> Best Value
+                  <div className="bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-1 rounded-full text-sm font-medium shadow-lg">
+                    Best Value
                   </div>
                 </div>
               )}
 
-              <div className="p-8 text-center">
-                <h3 className="text-xl font-bold text-[#0e3c47] mb-2">{plan.name}</h3>
-                <p className="text-gray-600 text-sm mb-4">{plan.subtitle}</p>
-                <div className="text-4xl font-bold text-[#0e3c47] mb-6">₹{plan.price}</div>
+              <div className="p-8 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold text-[#0e3c47] mb-2 text-center">{plan.name}</h3>
+                <p className="text-gray-600 text-sm mb-4 text-center">{plan.subtitle}</p>
+                <div className="text-4xl font-bold text-[#0e3c47] mb-6 text-center">₹{plan.price}</div>
 
-                <ul className="space-y-4 text-left mb-6">
+                {/* Features List */}
+                <ul className="space-y-4 text-left mb-6 flex-grow">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm text-gray-700">
-                      <span className="text-green-600">{feature.icon}</span>
-                      {feature.text}
+                      <span className="text-green-600">{getFeatureIcon(feature)}</span>
+                      {feature}
                     </li>
                   ))}
                 </ul>
 
-                <button
-                  className={`w-full py-3 rounded-xl font-semibold text-base transition-all duration-300 transform hover:scale-105 ${
-                    plan.bestValue
-                      ? "bg-gradient-to-r from-[#0e3c47] to-[#004051] text-white shadow-lg hover:opacity-90"
-                      : "bg-gradient-to-r from-[#0e3c47] to-[#004051] text-white shadow-lg hover:opacity-90"
-                  }`}
-                >
-                  Buy Now
-                </button>
+                {/* Buy Now Button sticks to bottom */}
+                <div className="mt-auto">
+                  <button
+                    onClick={() => handleBuyNow(plan)}
+                    className={`w-full py-3 rounded-md font-medium text-sm transition-transform duration-300 ease-in-out transform ${
+                      plan.buttonStyle === "primary"
+                        ? "bg-[#1c7389] text-white hover:bg-[#0e3c47] hover:scale-105"
+                        : "border border-gray-300 text-gray-700 hover:bg-gray-50 hover:scale-105"
+                    }`}
+                  >
+                    {plan.ctaText}
+                  </button>
+                </div>
               </div>
             </div>
           ))}

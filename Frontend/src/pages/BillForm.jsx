@@ -1,80 +1,77 @@
-import React, { useState } from 'react';
-// import { useLocation } from 'react-router-dom';
-
-
-import { useLocation, useNavigate } from 'react-router-dom';
-import OrderSummary from '../BillComponents/OrderSummary';
-import BillingAddressForm from '../BillComponents/BillingAddressForm';
-
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import OrderSummary from "../BillComponents/OrderSummary";
+import BillingAddressForm from "../BillComponents/BillingAddressForm";
 
 const BillForm = () => {
   const { state } = useLocation();
-  const plan = state?.plan;
+  const plan = state?.plan; // ✅ received from navigate
   const navigate = useNavigate();
 
-
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    streetAddress: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    country: 'India',
-    sameAsShipping: false
+    fullName: "",
+    email: "",
+    phone: "",
+    streetAddress: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    country: "India",
+    sameAsShipping: false,
   });
 
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (name, value) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
 
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ''
+        [name]: "",
       }));
     }
   };
 
   const validateForm = () => {
     const newErrors = {};
-
-    if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
-    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
-    if (!formData.streetAddress.trim()) newErrors.streetAddress = 'Street address is required';
-    if (!formData.city.trim()) newErrors.city = 'City is required';
-    if (!formData.state.trim()) newErrors.state = 'State is required';
-    if (!formData.zipCode.trim()) newErrors.zipCode = 'ZIP code is required';
+    if (!formData.fullName.trim()) newErrors.fullName = "Full name is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = "Email is invalid";
+    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
+    if (!formData.streetAddress.trim())
+      newErrors.streetAddress = "Street address is required";
+    if (!formData.city.trim()) newErrors.city = "City is required";
+    if (!formData.state.trim()) newErrors.state = "State is required";
+    if (!formData.zipCode.trim()) newErrors.zipCode = "ZIP code is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
-  e.preventDefault();
+    e.preventDefault();
+    if (validateForm()) {
+      navigate("/invoice", {
+        state: {
+          plan,
+          billing: formData,
+        },
+      });
+    }
+  };
 
-  if (validateForm()) {
-    navigate("/invoice", {
-      state: {
-        plan,
-        billing: formData
-      }
-    });
-  }
-};
-
-
+  // If no plan was passed
   if (!plan) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-gray-700 font-semibold">No plan selected. Please go back and choose a plan.</p>
+        <p className="text-xl text-gray-700 font-semibold">
+          No plan selected. Please go back and choose a plan.
+        </p>
       </div>
     );
   }

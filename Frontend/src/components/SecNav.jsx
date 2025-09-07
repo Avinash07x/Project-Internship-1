@@ -85,7 +85,7 @@ const SecNav = () => {
           {/* Top bar container */}
           <div className="flex items-center justify-between h-11">
             {/* Logo */}
-            <Link to="/" className="w-[160px] flex-shrink-0">
+            <Link to="/homepage" className="w-[160px] flex-shrink-0">
               <img src={DCKNav} alt="Logo" />
             </Link>
 
@@ -96,7 +96,7 @@ const SecNav = () => {
                   {item.link && !item.hasDropdown ? (
                     <Link
                       to={item.link}
-                      className="uppercase flex items-center px-2 py-2 text-[14px] font-bold text-[#075466] hover:text-cyan-600 hover:bg-cyan-50 rounded-lg transition-colors duration-200"
+                      className="uppercase flex items-center px-2 py-2 text-[12px] font-bold text-[#075466] hover:text-cyan-600 hover:bg-cyan-50 rounded-lg transition-colors duration-200"
                     >
                       {item.name}
                     </Link>

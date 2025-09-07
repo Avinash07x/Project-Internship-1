@@ -1,6 +1,6 @@
 import React from 'react'
 import Dedicatedforeignhero from '../Dedicatedpage/Dedicatedforeignhero';
-import Faqsection from '../components/Faqsection';
+import Faqsection from '../components/FAQsection.jsx';
 import Clients from '../components/Clients';
 import Pricingforeigntable from '../Dedicatedpage/Pricingforeigntable.jsx';
 import Pricingforeign from '../Dedicatedpage/pricingforeign';
@@ -9,8 +9,11 @@ const DedicatedServerforeign = () => {
   return (
         <div className=' bg-gradient-to-br from-[#dff6fd] to-[#f7fafe] '>
             <Dedicatedforeignhero />
+            <div id='DFPlans'>
             <Pricingforeigntable />
+            </div>
             <Pricingforeign />
+            
       <div className="max-w-[1200px] flex justify-center flex-col mx-auto px-0 py-1 ">
         <Faqsection />
       </div>

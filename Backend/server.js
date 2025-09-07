@@ -4,34 +4,21 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRoutes from "./routes/user.routes.js";
-import User from "./models/user.model.js";
+
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // MongoDB Connection
-mongoose.set("strictQuery", false);
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  .connect("mongodb://127.0.0.1:27017/dckeeper")
+  .then(() => {
+    console.log("Successfully Connect DB..");
   })
-  .then(async () => {
-    console.log("✅ MongoDB connected");
-
-    try {
-      const indexes = await User.collection.indexes();
-      const hasUsernameIndex = indexes.find((idx) => idx.name === "username_1");
-      if (hasUsernameIndex) {
-        await User.collection.dropIndex("username_1");
-        console.log("🗑️ Dropped index 'username_1'");
-      }
-    } catch (error) {
-      console.error("⚠️ Index drop error:", error.message);
-    }
-  })
-  .catch((err) => console.error("❌ MongoDB connection error:", err.message));
+  .catch((error) => {
+    console.log(error);
+  });
 
 // Stripe setup
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {

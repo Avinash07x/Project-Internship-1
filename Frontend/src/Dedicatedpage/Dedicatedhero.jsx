@@ -28,6 +28,7 @@ export default function Dedicatedhero() {
                 {/* CTA Button */}
                 <div className="pt-2 flex justify-center lg:justify-start">
                   <button
+                    onClick={() => handleScroll("DIPlans")}
                     className="group bg-[#126276] hover:bg-[#218aa4] text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg inline-flex items-center space-x-2 text-sm sm:text-base"
                     aria-label="View all hosting plans"
                   >

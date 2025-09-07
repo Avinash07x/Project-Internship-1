@@ -1,6 +1,6 @@
 import React from 'react'
 import Heroindia from "../VPS/Heroindia";
-import Faqsection from '../components/Faqsection';
+import Faqsection from '../components/FAQsection';
 import Clients from '../components/Clients';
 import Planindia from '../VPS/Planindia';
 import Features from '../VPS/Features';
@@ -9,7 +9,9 @@ const Vpsindia = () => {
     return (
         <div className=' bg-gradient-to-br from-[#dff6fd] to-[#f7fafe] '>
             <Heroindia />
-            <div className="max-w-[1200px] flex justify-center flex-col mx-auto px-0 py-1 ">
+            <div
+                id="VPSIPlans"
+                className="max-w-[1200px] flex justify-center flex-col mx-auto px-0 py-1 ">
                 <Planindia />
             </div>
             <Features />

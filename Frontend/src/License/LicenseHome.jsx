@@ -6,6 +6,12 @@ import FAQsection from "../components/FAQsection";
 import Clients from "../components/Clients";
 
 const PythonHostingPage = () => {
+  const handleScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <>
       <div className="min-h-[65vh] bg-gradient-to-br from-[#dff6fd] to-[#f7fafe] relative overflow-hidden">
@@ -30,46 +36,47 @@ const PythonHostingPage = () => {
                 </h1>
 
                 <p className="text-sm md:text-base text-[#0e3c47d5] max-w-2xl mx-auto lg:mx-0 leading-relaxed ">
-                 Get India’s best Linux WHM cPanel hosting at unbeatable prices—secure, reliable, and fully managed with premium support for your business growth.
+                  Get India’s best Linux WHM cPanel hosting at unbeatable prices—secure, reliable, and fully managed with premium support for your business growth.
                 </p>
               </div>
 
               {/* Features List */}
-               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center lg:text-left">
-                              <div className="bg-white/30 backdrop-blur-sm rounded-lg p-4 border border-slate-300/60">
-                                <div className="flex items-center justify-center lg:justify-start mb-2">
-                                  <Server className="w-5 h-5 text-[#1c758b] mr-2" />
-                                  <span className="text-[#0e3c47] font-semibold text-[20px]">
-                                    99.9% Uptime
-                                  </span>
-                                </div>
-                                <p className="text-slate-600 text-sm">Reliable performance</p>
-                              </div>
-              
-                              <div className="bg-white/30 backdrop-blur-sm rounded-lg p-4 border border-slate-300/60">
-                                <div className="flex items-center justify-center lg:justify-start mb-2">
-                                  <Cloud className="w-5 h-5 text-[#1c758b] mr-2" />
-                                  <span className="text-[#0e3c47] font-semibold text-[20px]">
-                                    Global CDN
-                                  </span>
-                                </div>
-                                <p className="text-slate-600 text-sm">Worldwide coverage</p>
-                              </div>
-              
-                              <div className="bg-white/30 backdrop-blur-sm rounded-lg p-4 border border-slate-300/60">
-                                <div className="flex items-center justify-center lg:justify-start mb-2">
-                                  <Download className="w-5 h-5 text-[#1c758b] mr-2" />
-                                  <span className="text-[#0e3c47] font-semibold text-[20px]">
-                                    Fast Speed
-                                  </span>
-                                </div>
-                                <p className="text-slate-600 text-sm">Optimized delivery</p>
-                              </div>
-                            </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center lg:text-left">
+                <div className="bg-white/30 backdrop-blur-sm rounded-lg p-4 border border-slate-300/60">
+                  <div className="flex items-center justify-center lg:justify-start mb-2">
+                    <Server className="w-5 h-5 text-[#1c758b] mr-2" />
+                    <span className="text-[#0e3c47] font-semibold text-[20px]">
+                      99.9% Uptime
+                    </span>
+                  </div>
+                  <p className="text-slate-600 text-sm">Reliable performance</p>
+                </div>
+
+                <div className="bg-white/30 backdrop-blur-sm rounded-lg p-4 border border-slate-300/60">
+                  <div className="flex items-center justify-center lg:justify-start mb-2">
+                    <Cloud className="w-5 h-5 text-[#1c758b] mr-2" />
+                    <span className="text-[#0e3c47] font-semibold text-[20px]">
+                      Global CDN
+                    </span>
+                  </div>
+                  <p className="text-slate-600 text-sm">Worldwide coverage</p>
+                </div>
+
+                <div className="bg-white/30 backdrop-blur-sm rounded-lg p-4 border border-slate-300/60">
+                  <div className="flex items-center justify-center lg:justify-start mb-2">
+                    <Download className="w-5 h-5 text-[#1c758b] mr-2" />
+                    <span className="text-[#0e3c47] font-semibold text-[20px]">
+                      Fast Speed
+                    </span>
+                  </div>
+                  <p className="text-slate-600 text-sm">Optimized delivery</p>
+                </div>
+              </div>
 
               {/* CTA Button */}
               <div className="pt-0">
                 <button
+                  onClick={() => handleScroll('LPlans')}
                   className="group bg-[#126276] hover:bg-[#218aa4] text-white font-semibold px-5 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg inline-flex items-center space-x-2 text-base"
                   aria-label="View all hosting plans"
                 >
@@ -140,8 +147,10 @@ const PythonHostingPage = () => {
           }
         `}</style>
       </div>
-      
-      <LPlans/>
+
+      <div id="LPlans">
+      <LPlans />
+      </div>
       <FAQsection />
 
       <div className=" mt-20">

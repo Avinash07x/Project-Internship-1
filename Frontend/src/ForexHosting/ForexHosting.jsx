@@ -23,6 +23,13 @@ const ForexHosting = () => {
     // Simulate live price updates
   }, []);
 
+  const handleScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const features = [
     { icon: Globe, text: "Access 50+ Currency Pairs" },
     { icon: BarChart3, text: "Real-time Market Analysis" },
@@ -66,11 +73,10 @@ const ForexHosting = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ">
             {/* Left Column - Main Content */}
             <div
-              className={`space-y-8 transform transition-all duration-1000 ${
-                isVisible
+              className={`space-y-8 transform transition-all duration-1000 ${isVisible
                   ? "translate-y-0 opacity-100"
                   : "translate-y-8 opacity-0"
-              }`}
+                }`}
             >
               {/* Live Price Ticker */}
 
@@ -92,11 +98,10 @@ const ForexHosting = () => {
                 {features.map((feature, index) => (
                   <div
                     key={index}
-                    className={`flex items-center space-x-3 transform transition-all duration-700 ${
-                      isVisible
+                    className={`flex items-center space-x-3 transform transition-all duration-700 ${isVisible
                         ? "translate-x-0 opacity-100"
                         : "translate-x-4 opacity-0"
-                    }`}
+                      }`}
                     style={{ transitionDelay: `${(index + 1) * 200}ms` }}
                   >
                     <div className="flex-shrink-0 w-8 h-8 bg-[#0077b6]/10 rounded-full flex items-center justify-center">
@@ -112,6 +117,7 @@ const ForexHosting = () => {
               {/* CTA Buttons */}
               <div className="pt-0">
                 <button
+                  onClick={() => handleScroll("Forexplans")}
                   className="group bg-[#126276] hover:bg-[#218aa4] text-white font-semibold px-5 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg inline-flex items-center space-x-2 text-base"
                   aria-label="View all hosting plans"
                 >
@@ -121,16 +127,15 @@ const ForexHosting = () => {
               </div>
 
               {/* Trust Badge */}
-              
+
             </div>
 
             {/* Right Column - Illustration */}
             <div
-              className={`relative bottom-[20px] transform transition-all duration-1200 ${
-                isVisible
+              className={`relative bottom-[20px] transform transition-all duration-1200 ${isVisible
                   ? "translate-y-0 opacity-100"
                   : "translate-y-12 opacity-0"
-              }`}
+                }`}
             >
               {/* Main Chart Container */}
               <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20">
@@ -238,7 +243,9 @@ const ForexHosting = () => {
           </div>
         </div>
       </section>
+      <div id="Forexplans">
       <ForexPlans />
+      </div>
       <ForexFeatures />
       <FAQsection />
       <div className=" mt-20">

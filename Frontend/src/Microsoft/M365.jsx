@@ -9,6 +9,12 @@ import MPlans from "./MPlans";
 import MFeatures from "./MFeatures";
 
 const M365 = () => {
+    const handleScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <>
       <div className="min-h-[65vh] bg-gradient-to-br from-[#dff6fd] to-[#f7fafe] relative overflow-hidden">
@@ -79,6 +85,7 @@ const M365 = () => {
               {/* CTA Button */}
               <div className="pt-0">
                 <button
+                  onClick={() => handleScroll('MPlans')}
                   className="group bg-[#126276] hover:bg-[#218aa4] text-white font-semibold px-5 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg inline-flex items-center space-x-2 text-base"
                   aria-label="View all hosting plans"
                 >
@@ -142,7 +149,9 @@ const M365 = () => {
           }
         `}</style>
       </div>
+      <div id="MPlans">
       <MPlans />
+      </div>
       <MFeatures />
       <FAQsection />
       <div className=" mt-20">

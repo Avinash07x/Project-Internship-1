@@ -9,7 +9,9 @@ const Cloudindia = () => {
     return (
         <div className=' bg-gradient-to-br from-[#dff6fd] to-[#f7fafe] '>
             <Heroindia />
-            <div className="max-w-[1200px] flex justify-center flex-col mx-auto px-0 py-1 ">
+            <div
+                id='CloudIndiaPlans'
+                className="max-w-[1200px] flex justify-center flex-col mx-auto px-0 py-1 ">
                 <Planindia />
             </div>
             <Features />

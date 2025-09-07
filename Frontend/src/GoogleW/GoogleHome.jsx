@@ -16,6 +16,13 @@ const GoogleHome = () => {
     setIsVisible(true);
   }, []);
 
+    const handleScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const features = [
     {
       icon: <Mail className="w-8 h-8" />,
@@ -128,6 +135,7 @@ const GoogleHome = () => {
               <FloatingElement delay={400}>
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <button
+                  onClick={() => handleScroll('Googleplans')}
                   className="group bg-[#126276] hover:bg-[#218aa4] text-white font-semibold px-5 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg inline-flex items-center space-x-2 text-base"
                   aria-label="View all hosting plans"
                 >

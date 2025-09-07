@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Check, Star, Monitor, Terminal } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Planindia = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [selectedOS, setSelectedOS] = useState("linux");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setTimeout(() => setIsVisible(true), 100);
         return () => clearTimeout(timer);
     }, []);
+
+    const handleBuyNow = (plan) => {
+        navigate("/billing", { state: { plan } });
+    };
 
     const linuxPlans = [
         {
@@ -27,6 +33,7 @@ const Planindia = () => {
             ],
             ctaText: "BUY NOW",
             popular: false,
+            buttonStyle: "primary",
         },
         {
             name: "Traffic Plan",
@@ -44,6 +51,7 @@ const Planindia = () => {
             ],
             ctaText: "BUY NOW",
             popular: false,
+            buttonStyle: "primary",
         },
         {
             name: "Standard Plan",
@@ -61,6 +69,7 @@ const Planindia = () => {
             ],
             ctaText: "BUY NOW",
             popular: true,
+            buttonStyle: "primary",
         },
         {
             name: "Enterprise Plan",
@@ -78,6 +87,7 @@ const Planindia = () => {
             ],
             ctaText: "BUY NOW",
             popular: false,
+            buttonStyle: "primary",
         },
     ];
 
@@ -98,6 +108,7 @@ const Planindia = () => {
             ],
             ctaText: "BUY NOW",
             popular: false,
+            buttonStyle: "primary",
         },
         {
             name: "Traffic Plan",
@@ -115,6 +126,7 @@ const Planindia = () => {
             ],
             ctaText: "BUY NOW",
             popular: false,
+            buttonStyle: "primary",
         },
         {
             name: "Standard Plan",
@@ -132,6 +144,7 @@ const Planindia = () => {
             ],
             ctaText: "BUY NOW",
             popular: true,
+            buttonStyle: "primary",
         },
         {
             name: "Enterprise Plan",
@@ -149,6 +162,7 @@ const Planindia = () => {
             ],
             ctaText: "BUY NOW",
             popular: false,
+            buttonStyle: "primary",
         },
     ];
 
@@ -159,6 +173,7 @@ const Planindia = () => {
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div
+                    id="VPSFPlans"
                     className={`text-center mb-16 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                         }`}
                 >
@@ -177,8 +192,8 @@ const Planindia = () => {
                                 <button
                                     onClick={() => setSelectedOS("linux")}
                                     className={`px-6 py-2 text-sm rounded-full font-semibold transition-all duration-300 ${selectedOS === "linux"
-                                            ? "bg-blue-600 text-white shadow"
-                                            : "text-blue-700 hover:bg-blue-50"
+                                        ? "bg-blue-600 text-white shadow"
+                                        : "text-blue-700 hover:bg-blue-50"
                                         }`}
                                 >
                                     Linux
@@ -186,8 +201,8 @@ const Planindia = () => {
                                 <button
                                     onClick={() => setSelectedOS("windows")}
                                     className={`px-6 py-2 text-sm rounded-full font-semibold transition-all duration-300 ${selectedOS === "windows"
-                                            ? "bg-blue-600 text-white shadow"
-                                            : "text-blue-700 hover:bg-blue-50"
+                                        ? "bg-blue-600 text-white shadow"
+                                        : "text-blue-700 hover:bg-blue-50"
                                         }`}
                                 >
                                     Windows
@@ -213,10 +228,9 @@ const Planindia = () => {
                         >
                             {/* Popular Badge */}
                             {plan.popular && (
-                                <div className="absolute -top-7 left-1/2 transform -translate-x-1/2">
-                                    <div className="bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-1 rounded-full text-sm font-medium flex items-center gap-1 shadow-lg">
-                                        <Star className="w-4 h-4 fill-current" />
-                                        Most Popular
+                                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                                    <div className="bg-green-600 text-white px-4 py-1 rounded-full text-sm font-medium relative -top-1">
+                                        Best value
                                     </div>
                                 </div>
                             )}
@@ -260,9 +274,10 @@ const Planindia = () => {
 
                                 {/* CTA Button */}
                                 <button
-                                    className={`w-full py-4 px-6 rounded-xl font-semibold text-base transition-all duration-300 transform hover:scale-105 ${plan.popular
-                                        ? "rounded-xl border border-white bg-gradient-to-r from-[#0e3c47] to-[#0040514d] text-white shadow-lg backdrop-blur-md transition duration-300 hover:border-white/100 hover:from-[#133c46] hover:to-[#0040515d] hover:shadow-xl"
-                                        : "bg-gray-100 text-gray-900 hover:bg-blue-50 hover:text-blue-700 border-2 border-transparent hover:border-blue-200"
+                                    onClick={() => handleBuyNow(plan)}
+                                    className={`w-full py-3 rounded-md font-medium text-sm transition-transform duration-300 ease-in-out transform ${plan.buttonStyle === "primary"
+                                        ? "bg-[#1c7389] text-white hover:bg-[#0e3c47] hover:scale-105"
+                                        : "border border-gray-300 text-gray-700 hover:bg-gray-50 hover:scale-105"
                                         }`}
                                 >
                                     {plan.ctaText}

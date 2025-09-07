@@ -10,7 +10,9 @@ const Cloudforeign = () => {
     return (
         <div className=' bg-gradient-to-br from-[#dff6fd] to-[#f7fafe] '>
             <Heroforeign />
-            <div className="max-w-[1200px] flex justify-center flex-col mx-auto px-0 py-1 ">
+            <div
+                id='CloudForeignPlans'
+                className="max-w-[1200px] flex justify-center flex-col mx-auto px-0 py-1 ">
                 <Planforeign />
             </div>
             <Features />

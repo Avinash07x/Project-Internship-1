@@ -1,12 +1,6 @@
 import React from "react";
 import DCKFoot from "../assets/DCK - Footer.png";
-import {
-  Mail,
-  Phone,
-  Instagram,
-  Linkedin,
-} from "lucide-react";
-
+import { Mail, Phone, Instagram, Linkedin } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -33,16 +27,24 @@ const Footer = () => {
   ];
 
   const services = [
-    "Dedicated Hosting",
-    "Email Marketing Server",
-    "Cloud Hosting",
-    "VPS",
-    "Reseller Hosting",
-    "Shared Hosting",
+    { name: "Dedicated Hosting", link: "/dedicatedserver/india" },
+    { name: "Email Marketing Server", link: "/bulk-email" },
+    { name: "Cloud Hosting", link: "/cloud/india" },
+    { name: "VPS", link: "/vps/india" },
+    { name: "Reseller Hosting", link: "/reseller-hosting" },
+    { name: "Shared Hosting", link: "/shared-hosting" },
   ];
 
-  const products = ["Google Workspace", "Licenses"];
-  const legal = ["Terms & Conditions", "Privacy policy", "Refund policy"];
+  const products = [
+    { name: "Google Workspace", link: "/google-workspace" },
+    { name: "Licenses", link: "/license" },
+  ];
+
+  const legal = [
+    { name: "Terms & Conditions", link: "/terms" },
+    { name: "Privacy Policy", link: "/privacy-policy" },
+    { name: "Refund Policy", link: "/refund-policy" },
+  ];
 
   return (
     <footer className="bg-gray-800 text-white py-8 px-5 sm:px-8 md:px-12 relative overflow-hidden -mt-[1px]">
@@ -51,11 +53,13 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center w-32 sm:w-40 pt-2">
+              <Link to={"/homepage"}>
               <img
                 className="bg-gray-100 p-3 rounded-2xl"
                 src={DCKFoot}
-                alt=""
+                alt="DCKeepers Logo"
               />
+              </Link>
             </div>
             <p className="text-sm leading-relaxed opacity-80 mt-5 max-w-xs sm:max-w-sm">
               Complete solution for online businesses including Domain
@@ -75,16 +79,16 @@ const Footer = () => {
                   key={index}
                   className="text-xs hover:text-teal-200 cursor-pointer transition-colors hover:translate-x-1 transform duration-200"
                 >
-                  <span className="hover:border-b border-teal-200">
-                    {service}
-                  </span>
+                  <Link to={service.link} className="hover:border-b border-teal-200">
+                    {service.name}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Products & Legal */}
-          <div className="">
+          <div>
             <h3 className="text-sm font-bold mb-3 border-b border-teal-600 pb-1">
               PRODUCTS
             </h3>
@@ -94,9 +98,9 @@ const Footer = () => {
                   key={index}
                   className="text-xs hover:text-teal-200 cursor-pointer transition-colors hover:translate-x-1 transform duration-200"
                 >
-                  <span className="hover:border-b border-teal-200">
-                    {product}
-                  </span>
+                  <Link to={product.link} className="hover:border-b border-teal-200">
+                    {product.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -110,7 +114,9 @@ const Footer = () => {
                   key={index}
                   className="text-xs hover:text-teal-200 cursor-pointer transition-colors hover:translate-x-1 transform duration-200"
                 >
-                  <span className="hover:border-b border-teal-200">{item}</span>
+                  <Link to={item.link} className="hover:border-b border-teal-200">
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -189,7 +195,7 @@ const Footer = () => {
           </div>
 
           {/* Social Media Icons */}
-          <div className="">
+          <div>
             <h4 className="font-medium mb-3 text-sm">Follow Us</h4>
             <div className="flex gap-3 flex-wrap">
               {socialMedia.map((social, index) => {
@@ -201,6 +207,8 @@ const Footer = () => {
                     className={`text-gray-400 ${social.color} transition-all duration-300 hover:scale-110 transform`}
                     title={social.name}
                     aria-label={`Follow us on ${social.name}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <IconComponent className="w-5 h-5" />
                   </a>

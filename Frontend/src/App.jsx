@@ -27,6 +27,9 @@ import ProxyHome from "./ProxyServer/ProxyHome";
 import BillForm from "./pages/BillForm.jsx";
 import Invoice from "./BillComponents/InvoicePage.jsx";
 import Success from "./pages/Success.jsx";
+import Terms from "./pages/Terms.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import RefundPolicy from "./pages/RefundPolicy.jsx";
 
 
 
@@ -69,7 +72,9 @@ const App = () => {
 
           <Route path="/billing" element={<BillForm />} />
           <Route path="/invoice" element={<Invoice />} />
-          
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
         </Routes>
         <Footer />
       </BrowserRouter>

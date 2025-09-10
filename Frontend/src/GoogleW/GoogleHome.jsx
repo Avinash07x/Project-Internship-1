@@ -1,7 +1,3 @@
-
-
-// export default GoogleHome;
-
 import React, { useState, useEffect } from 'react';
 import { Play, Users, FileText, Calendar, Mail, MessageCircle, Video, Cloud, Settings, ChevronRight, Star, Shield, Zap, ArrowRight } from 'lucide-react';
 import GooglePlans from './GooglePlans';

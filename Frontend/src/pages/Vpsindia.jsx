@@ -1,6 +1,6 @@
 import React from 'react'
 import Heroindia from "../VPS/Heroindia";
-import Faqsection from '../components/FAQsection';
+import FAQsection from '../components/FAQsection';
 import Clients from '../components/Clients';
 import Planindia from '../VPS/Planindia';
 import Features from '../VPS/Features';
@@ -16,7 +16,7 @@ const Vpsindia = () => {
             </div>
             <Features />
             <div className="max-w-[1200px] flex justify-center flex-col mx-auto px-0 py-1 ">
-                <Faqsection />
+                <FAQsection />
             </div>
             <div className="mt-20">
                 <Clients />

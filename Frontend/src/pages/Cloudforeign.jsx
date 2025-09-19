@@ -1,9 +1,9 @@
 import React from 'react'
 import Heroforeign from '../Cloud/Heroforeign';
 import Planforeign from '../Cloud/Planforeign';
-import Faqsection from '../components/Faqsection';
 import Clients from '../components/Clients';
 import Features from '../VPS/Features';
+import FAQsection from '../components/FAQsection';
 
 
 const Cloudforeign = () => {
@@ -17,7 +17,7 @@ const Cloudforeign = () => {
             </div>
             <Features />
             <div className="max-w-[1200px] flex justify-center flex-col mx-auto px-0 py-1 ">
-                <Faqsection />
+                <FAQsection />
             </div>
             <div className="mt-20">
                 <Clients />
